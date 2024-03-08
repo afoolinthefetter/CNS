@@ -1,7 +1,7 @@
 **Author:** Aman Gupta (aman.gupta@iitgn.ac.in) (23210122)
 **** 
 # Assignment-3 CTF
-**** 
+
 ## Question Number 1 (Cookies)
 
 - There was a cookie called `name` set to some integer value.
