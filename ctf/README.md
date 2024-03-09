@@ -1,4 +1,5 @@
 **Author:** Aman Gupta (aman.gupta@iitgn.ac.in) (23210122)
+https://github.com/afoolinthefetter/CNS/tree/main/ctf
 **** 
 # Assignment-3 CTF
 
@@ -97,3 +98,42 @@ Username: admin
 Password: picoCTF{53rv3r_53rv3r_53rv3r_53rv3r_53rv3r}
 ```
 - Using this username and password, I was able to login and then the website returned the flag. (password itself was the flag)
+Reference: https://github.com/afoolinthefetter/CNS/tree/main/ctf/qn4
+
+## Question Numebr 5 (Who are you?)
+- Switched to wget to wget on shell to add and remove headers easily.
+- Inital get request made:
+```bash
+wget http://mercury.picoctf.net:36622/
+```
+- The website prompted whatever was missing. The prompts were (and how i dealt with it):
+    - Only people who use the official PicoBrowser are allowed on this site! 
+        ```bash
+        wget http://mercury.picoctf.net:36622/ -U PicoBrowser
+        ```
+    - I don't trust users visiting from another site.
+         ```bash
+        wget http://mercury.picoctf.net:36622/ -U PicoBrowser --header="Referer:http://mercury.picoctf.net:36622"
+        ```
+    - Sorry, this site only worked in 2018.
+        ```bash
+        wget http://mercury.picoctf.net:36622/ -U PicoBrowser --header="Referer:http://mercury.picoctf.net:36622" --header="Date:2018"
+        ```
+    - I don't trust users who can be tracked.
+        ```bash
+        wget http://mercury.picoctf.net:36622/ -U PicoBrowser --header="Referer:http://mercury.picoctf.net:36622" --header="Date:2018" --header="DNT:dnt"
+        ```
+    - This website is only for people from Sweden.
+        ```bash
+        wget http://mercury.picoctf.net:36622/ -U PicoBrowser --header="Referer:http://mercury.picoctf.net:36622" --header="Date:2018" --header="DNT:dnt" --header="X-Forwarded-For:90.129.0.1"
+        ```
+        (Used a random public IP from Sweden)
+    - You're in Sweden but you don't speak Swedish?
+        ```bash
+        wget http://mercury.picoctf.net:36622/ -U PicoBrowser --header="Referer:http://mercury.picoctf.net:36622" --header="Date:2018" --header="DNT:dnt" --header="X-Forwarded-For:90.129.0.1" --header="Accept-language:sv"
+        ```
+    - What can I say except, you are welcome.
+    picoCTF{http_h34d3rs_v3ry_c0Ol_much_w0w_0da16bb2}
+
+Reference: https://github.com/afoolinthefetter/CNS/tree/main/ctf/qn5
+    
