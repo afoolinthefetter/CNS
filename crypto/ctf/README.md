@@ -98,6 +98,7 @@ Username: admin
 Password: picoCTF{53rv3r_53rv3r_53rv3r_53rv3r_53rv3r}
 ```
 - Using this username and password, I was able to login and then the website returned the flag. (password itself was the flag)
+
 Reference: https://github.com/afoolinthefetter/CNS/tree/main/ctf/qn4
 
 ## Question Numebr 5 (Who are you?)
