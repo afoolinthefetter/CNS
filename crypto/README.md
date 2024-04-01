@@ -15,7 +15,7 @@
     m = pow(c,d,n)
     print(long_to_bytes(m))
      ```
-Full code can be referenced on the following link: 
+Full code can be referenced on the following link: https://github.com/afoolinthefetter/CNS/blob/main/crypto/one.py
 
 ## Easy Peasy
 - The `otp.py` file given to us shows that the 50000 length long key is used in parts to xor with the message to proguce the encrypted value.
@@ -98,7 +98,7 @@ Full code can be referenced on the following link:
 - We are going to use known plaintext attack on this to ger the flag.
 - Double DES is susceptible to a meet-in-the-middle assault. This explanation from StackExchange elucidates the method succinctly. Essentially, it begins with the plaintext, then exhaustively tests every conceivable key, encrypting the plaintext and recording the outcomes in a dictionary. Subsequently, the original encrypted data (in this instance, `a0c8972feadffda4`) undergoes brute-force decryption with every possible key, with the results being stored concurrently. The process identifies the overlap between the encrypted and decrypted values, revealing the two keys employed in the Double DES scheme.
 - The usage of 6 bit and the remaining 2 bites padded makes this attack easier.
-- The script bruteforces the first and second key using the aforementioned exploit. Then it finds the intersection using Python's set class. Finally, now that both keys are known, the encrypted flag is decrypted. Reference: 
+- The script bruteforces the first and second key using the aforementioned exploit. Then it finds the intersection using Python's set class. Finally, now that both keys are known, the encrypted flag is decrypted. Reference: https://github.com/afoolinthefetter/CNS/blob/main/crypto/double_des/ddes.ipynb
 
 ## Scrambled RSA
 - From hit and trial, we can figure out that the rsa is done character wise based on some account of the index of each character.
