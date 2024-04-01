@@ -101,5 +101,7 @@ Full code can be referenced on the following link:
 - The script bruteforces the first and second key using the aforementioned exploit. Then it finds the intersection using Python's set class. Finally, now that both keys are known, the encrypted flag is decrypted. Reference: 
 
 ## Scrambled RSA
-
-
+- From hit and trial, we can figure out that the rsa is done character wise based on some account of the index of each character.
+- We hit and trail for each character at a particular place and check if the portion of reply is in the encrypted flag.
+- If it is there, we take it out of the encrypted falg and keep doint this until there is nothing left in the encrypted flag.
+- We are using a program to do this. Reference can be found: 
