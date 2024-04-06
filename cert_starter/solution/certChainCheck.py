@@ -7,7 +7,6 @@ import certifi
 import pem
 import fnmatch
 import urllib
-import re
 
 # Cert Paths
 trusted_certs_for_pem = certifi.where()
@@ -62,7 +61,7 @@ def x509_cert_chain_check(target_domain: str) -> bool:
         # Check Leaf
         store_ctx = OpenSSL.crypto.X509StoreContext(store,leaf_crt)
         store_ctx.verify_certificate()    
-
+        
         subjectNameAt = -1
         for i in range(leaf_crt.get_extension_count()):
             if leaf_crt.get_extension(i).get_short_name() == b'subjectAltName':
@@ -70,12 +69,19 @@ def x509_cert_chain_check(target_domain: str) -> bool:
                 break
         if subjectNameAt == -1:
             return False
-        
-        # Check if the leaf node has wrong hostname
         extension = leaf_crt.get_extension(subjectNameAt)
         extension = extension.__str__()
-        pattern = re.compile("DNS:\*[a-z\.-]*")
-        matches = pattern.findall(extension) 
+        matches = []
+        start_index = extension.find("DNS:")
+        while start_index != -1:
+            end_index = extension.find(",", start_index)
+            if end_index == -1:
+                matches.append(extension[start_index:])
+                break
+            else:
+                matches.append(extension[start_index:end_index])
+                start_index = extension.find("DNS:", end_index)
+        
         for match in matches:
             domain_name = match.lstrip("DNS:*")
             if domain_name in target_domain:
